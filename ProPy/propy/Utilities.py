@@ -28,6 +28,8 @@ def parse_yaml_file(filename):
     Return:
         :py:class:`dict` : dictionary with the content of the file
     """
+    yaml = YAML()  
     with open(filename, 'r') as f:
-        return yaml.load(f, Loader=yaml.FullLoader)
+        return yaml.load(f)
+
 
