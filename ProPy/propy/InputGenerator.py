@@ -5,8 +5,6 @@ The input can be created from scratch or can be initialized from an existing inp
 """
 import os
 from copy import deepcopy
-from ruamel.yaml import YAML
-from ruamel.yaml.comments import CommentedMap
 from propy import Utilities as U
 
 # Define the default input dictionary and the associated one with the comments for each key
@@ -18,35 +16,37 @@ comments = {
     'iteration': 'Number of iterations of the simulation',
     'io_step': 'Number of iterations between two I/O operations',      
 }
+# Define the header of the input file
+branch,commit = U.get_git_info()
+header =  f"""Input file for the main program
+Branch: '{branch}'
+Commit: '{commit}'
 
-yaml = YAML()  
-yaml.preserve_quotes = True
-
-def create_commented_yaml(data):
-    """
-    Convert a dictionary into a CommentedMap and add comments.
-    The comments start at the same column for each key. 
-    """
-    yaml_data = CommentedMap()
-    
-    for key, value in data.items():
-        yaml_data[key] = value
-        if key in comments:
-            yaml_data.yaml_add_eol_comment(comments[key], key,column=30)
-
-    return yaml_data
-
+"""
 class InputGenerator(dict):
     """
     Class to generate an manipulate the input file used by the main program.
+    The input can be created from scratch or can be initialized from an existing input file.
+    
+    Attributes:
+        default (:py:class:`dict`): default input dictionary
+        comments (:py:class:`dict`): dictionary with the comments for each key in the input dictionary
+    
+    Args:
+        filename (:py:class:`string`) : name of an exsistent input file, used to
+            initialize the dictionaries of the object
+        **kwargs : keyword arguments used to initialize the keys of the object
 
+    Methods:
+        parseInputFile : Build the input dictionary from a YAML file.
+        write : Write the input object to a YAML file, preserving comments.     
     """
 
     def __init__(self,filename=None,**kwargs):
         """
         Initialize the default keys and values. 
         Default can be updated the dictionaries with the kwargs passed as input parameters.
-        If an input file is provided it is parsed and the 'file' key is added to the object dictionary.
+        If an input file is provided it is parsed and the dictionary is updated.
 
         Args:
             filename (:py:class:`string`) : name of an exsistent input file, used to
@@ -60,7 +60,6 @@ class InputGenerator(dict):
         self.update(deepcopy(default))
 
         if filename is not None:
-            self['filename'] = filename
             self.parseInputFile(filename)
         self.update(kwargs)
 
@@ -78,19 +77,18 @@ class InputGenerator(dict):
             raise FileNotFoundError(f"Input file '{filename}' not found")
         self.update(U.parse_yaml_file(filename))
 
-    def write(self, filename,verbose=True):
+
+    def write(self, filename,column=30,verbose=True):
         """
         Write the input object to a YAML file, preserving comments.
 
         Args:
             filename (:py:class:`string`): name of the file including the path
+            column (:py:class:`int`): column where the comments start
             verbose (:py:class:`bool`): if True, print a message to the standard output
         """
-        yaml_data = create_commented_yaml(self)  # Ensure comments are added
-        with open(filename, "w", encoding="utf-8") as f:
-            yaml.dump(yaml_data, f)
-        if verbose : print(f"File YAML '{filename}' written on disk")
-
+        yaml_data = U.create_commented_yaml(self,comments,header=header,column=column)  
+        U.dict_to_yaml_dump(yaml_data,filename,verbose=verbose)
 
 
    

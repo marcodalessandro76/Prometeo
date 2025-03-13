@@ -5,7 +5,8 @@ Input, logs and report files are written in Yaml.
 
 ## Installation of the ProPy interface 
 ProPy is the python interface of the package, which is the main tool to interact with the code
-To install the package move inside the PropY folder and install the package using the pip tools,
+To install the package move inside the PropY folder and install the package using the standard python tools.
+For instance using the pip tools,
 
     pip3 install -e .
 
