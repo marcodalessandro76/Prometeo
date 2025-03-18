@@ -5,7 +5,7 @@ The input can be created from scratch or can be initialized from an existing inp
 """
 import os
 from copy import deepcopy
-from propy import Utilities as U
+from prometeoPy import Utilities as U
 
 # Define the default input dictionary and the associated one with the comments for each key
 default = {

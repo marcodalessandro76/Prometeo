@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 from os import path
 
 # Package meta-data.
-NAME = 'ProPy'
+NAME = 'prometeoPy'
 DESCRIPTION = 'Python Interface for the Prometero template project'
 URL = 'https://github.com/marcodalessandro76/Prometeo'
 EMAIL = 'marco.dalessandro@ism.cnr.it'
