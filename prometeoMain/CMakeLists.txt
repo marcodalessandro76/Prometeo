@@ -28,3 +28,8 @@ if(OpenMP_CXX_FOUND)
     target_compile_options(montecarlo_pi PRIVATE ${OpenMP_CXX_FLAGS})
     target_link_libraries(montecarlo_pi PRIVATE ${OpenMP_CXX_LIBRARIES})
 endif()
+
+# Enable Yaml-cpp
+find_package(yaml-cpp REQUIRED)
+include_directories(${yaml-cpp_INCLUDE_DIRS})
+target_link_libraries(montecarlo_pi PRIVATE yaml-cpp::yaml-cpp)
