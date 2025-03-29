@@ -1,21 +1,44 @@
 #include "Simulation.h"
 
-Simulation::Simulation(long long samples) : randomGenerator() {
-    num_samples = samples;
-    pi_estimate = 0.0;
-    std::cout << "Number of threads in Simulation: " << omp_get_max_threads() << std::endl;
+using namespace std;
 
+Simulation::Simulation(string inpFile) : randomGenerator(), inputFile(inpFile), pi_estimate(0.0) {
+    cout << "Input filename to be used: " << inputFile << endl;
+    parseInputFile(); // Initialize inputPars member variable 
+}
+
+void Simulation::parseInputFile() {
+    // Parse the input file and set the input parameters
+
+    try {
+        YamlParser parser(inputFile); // Load the configuration from the YAML file
+        inputPars.num_samples = parser.getInt("num_samples"); // Get the number of samples from the YAML file
+        //double var = parser.getDouble("var1");
+
+        //std::cout << "num_samples: " << inputPars.num_samples << std::endl;
+        //std::cout << "var: " << var << std::endl;  
+
+    } catch (const YamlParser::KeyNotFoundException& e) {
+        // key not found in the YAML file
+        std::cerr << "Error: " << e.what() << std::endl;
+    } catch (const YamlParser::YamlParseException& e) {
+        // parsing error in the YAML file 
+        std::cerr << "Error YAML: " << e.what() << std::endl;
+    }
 }
 
 void Simulation::run() {
     long long count_inside = 0;
+
+    cout << "Calculating pi using Monte Carlo with " << inputPars.num_samples << " samples..." << endl;
+    cout << "Number of threads in Simulation: " << omp_get_max_threads() << endl;
 
     #pragma omp parallel
     {
         long long local_count = 0;
 
         #pragma omp for
-        for (long long i = 0; i < num_samples; i++) {
+        for (long long i = 0; i < inputPars.num_samples; i++) {
             double x = randomGenerator.getRandomNumber();
             double y = randomGenerator.getRandomNumber();
 
@@ -28,7 +51,7 @@ void Simulation::run() {
         count_inside += local_count;
     }
 
-    pi_estimate = 4.0 * count_inside / num_samples;
+    pi_estimate = 4.0 * count_inside / inputPars.num_samples;
 }
 
 double Simulation::getPiEstimate() const {

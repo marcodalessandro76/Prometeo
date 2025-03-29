@@ -2,7 +2,6 @@
 
 RandomGenerator::RandomGenerator() {
     int num_threads = omp_get_max_threads();
-    std::cout << "Number of threads in RandomGenerator: " << num_threads << std::endl;
     generators.resize(num_threads);
     distributions.resize(num_threads);
 

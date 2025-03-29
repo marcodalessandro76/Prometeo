@@ -21,7 +21,6 @@ public:
     // Methods to retrieve lists and maps
     std::vector<std::string> getStringList(const std::string& key) const;
     std::map<std::string, std::string> getStringMap(const std::string& key) const;
-
     // Generic method to retrieve any YAML node
     YAML::Node getNode(const std::string& key) const;
 
