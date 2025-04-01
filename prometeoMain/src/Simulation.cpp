@@ -8,16 +8,11 @@ Simulation::Simulation(string inpFile) : randomGenerator(), inputFile(inpFile), 
 }
 
 void Simulation::parseInputFile() {
-    // Parse the input file and set the input parameters
 
     try {
         YamlParser parser(inputFile); // Load the configuration from the YAML file
         inputPars.num_samples = parser.getInt("num_samples"); // Get the number of samples from the YAML file
-        //double var = parser.getDouble("var1");
-
-        //std::cout << "num_samples: " << inputPars.num_samples << std::endl;
-        //std::cout << "var: " << var << std::endl;  
-
+        // You can add more parameters here as needed
     } catch (const YamlParser::KeyNotFoundException& e) {
         // key not found in the YAML file
         std::cerr << "Error: " << e.what() << std::endl;

@@ -21,7 +21,7 @@ ProgramArgs parseArgs(int argc, char *argv[]) {
         }
         // Add argument parsing for other options here (e.g., -out output_filename)
         else if (arg == "-h" || arg == "--help") {
-            cout << "Usage: mpntecarlo_pi.exe [-inp| --input input_filename] [-h|--help]" << endl;
+            cout << "Usage: mpntecarlo_pi.exe [-inp|--input input_filename] [-h|--help]" << endl;
             exit(0);
         }
         else if (arg.rfind("-", 0) == 0) {
