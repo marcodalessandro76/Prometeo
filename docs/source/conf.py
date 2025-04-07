@@ -21,10 +21,15 @@ release = '1.0'
 extensions = [
     'sphinx.ext.autodoc',
     'breathe',
+    'sphinx.ext.extlinks',
+    'nbsphinx'
 ]
 
+extlinks = {
+    'doxygenhtml': ('../../doxygen/html/%s', '%s'),  
+}
 breathe_projects = {
-    "Prometeo_cxx": "../doxygen/xml",
+    "Prometeo_cxx": "../doxygen/xml", 
 }
 
 breathe_default_project = "Prometeo_cxx"

@@ -14,7 +14,7 @@ Installation of the C++ code
 ----------------------------
 
 To install the c++ code you need to have a working installation of cmake and a C++ compiler with the OMP and Yaml support.
-The package is designed to be installed in a local folder, e.g. /home/username/Applications/Prometeo/prometeoMain.
+The package is designed to be installed in a local folder, e.g. /home/username/Applications/Prometeo/cxx_code.
 The installation is done using the standard cmake tools. For instance, from the folder where you cloned the repository,
 you can run the following commands:
 
@@ -37,11 +37,24 @@ and install the package using the standard python tools. For instance using the 
 Note that the _editable_ -e option creates a link from the location of the package to local python repository folder.
 In this way you do not need to recompile the package if you make some modifications, useful for coding.
 
+Usage of the code
+------------------  
+
+Here we describe the basic usage of the code. The package is mainly designed to be managed using its python interface inside 
+a jupyter notebook but it can also be extecuted from the command line. First set the OMP_NUM_THREADS environment variable to 
+the number of threads you want to use. Then you can run the code using the following command:
+
+    ./program_name -i input.yaml -r run_options.yaml
+
+where input.yaml is the input file, that contains the parameters of the simulation, and run_options.yaml wich is a file that 
+contains information about the run, such as the name of folder where the output files are written. 
+
+
 Build of the documentation
 --------------------------
 
 The C++ documentation is built using the Doxygen tools. To build the documentation you need to have a working installation of Doxygen.
-To build the documentation move to the folder /home/username/Applications/Prometeo/PrometeoMain and use the following command:
+To build the documentation move to the folder /home/username/Applications/Prometeo/cxx_code and use the following command:
 
     doxygen Doxyfile
 
@@ -59,21 +72,40 @@ The breathe plugin is used to integrate the C++ documentation in the Sphinx docu
 
 
 PrometeoPy documentation
-------------------------
+************************
 
 The classes of the PrometeoPy module are
 
 .. toctree:: inputGenerator
+.. toctree:: calculator
+.. toctree:: runRules
 
-PrometeoMain C++ documentation
-------------------------------
 
-.. doxygenfunction:: Simulation::Simulation 
+C++ documentation
+*****************
 
+.. doxygenclass:: Simulation
+.. doxygenstruct:: ProgramArgs
+.. doxygenclass:: YamlParser
+.. doxygenclass:: RandomGenerator
+
+.. doxygenfile:: ArgsParser.h
+
+For further details see directly the Doxygen C++ documentation: :doxygenhtml:`index.html`
+
+Prometeo notebook section
+---------------------
+
+In this page you find some tutorials and examples that explain the usage of the package.
+
+.. toctree::
+   :maxdepth: 1
+
+   notebooks
 
 
 Indices and tables
-==================
+------------------
 
 * :ref:`genindex`
 * :ref:`modindex`

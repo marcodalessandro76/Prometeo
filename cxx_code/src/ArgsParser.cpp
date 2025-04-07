@@ -2,7 +2,6 @@
 #include <iostream>
 #include <string>
 
-// Function definition for parsing command-line arguments
 ProgramArgs parseArgs(int argc, char *argv[]) {
     using namespace std;
     ProgramArgs args; // Initialize with the default value
