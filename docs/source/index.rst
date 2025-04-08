@@ -29,7 +29,7 @@ Installation of the python interface
 ------------------------------------
 
 The python interface of the package is the main tool to interact with the code.
-To install the package you can clone this repository in a local folder, e.g. /home/username/Applications/Prometeo/PrometeoPy
+To install the package you can clone this repository in a local folder, e.g. /home/username/Applications/Prometeo/py_code
 and install the package using the standard python tools. For instance using the pip tools,
 
     pip3 install -e .
@@ -40,9 +40,9 @@ In this way you do not need to recompile the package if you make some modificati
 Usage of the code
 ------------------  
 
-Here we describe the basic usage of the code. The package is mainly designed to be managed using its python interface inside 
-a jupyter notebook but it can also be extecuted from the command line. First set the OMP_NUM_THREADS environment variable to 
-the number of threads you want to use. Then you can run the code using the following command:
+The package is mainly designed to be managed using its python interface inside a jupyter notebook but it can also be extecuted 
+from the command line. First set the OMP_NUM_THREADS environment variable to the number of threads you want to use. Then you 
+can run the code using the following command:
 
     ./program_name -i input.yaml -r run_options.yaml
 
@@ -60,36 +60,31 @@ To build the documentation move to the folder /home/username/Applications/Promet
 
 
 The Python documentation is built using the Sphinx tools. To build the documentation you need to have a working installation of Sphinx.
-To build the documentation move to the folder /home/username/Applications/Prometeo/PrometeoPy/docs and use the following command:
+To build the documentation move to the folder /home/username/Applications/Prometeo/docs and use the following command:
 
     make html
 
 The breathe plugin is used to integrate the C++ documentation in the Sphinx documentation. 
 
-.. toctree::
-    :maxdepth: 2
-    :caption: Contents:
-
-
 PrometeoPy documentation
 ************************
 
-The classes of the PrometeoPy module are
+The detailed description of the python interface is given in the file py_doc.rst.
 
-.. toctree:: inputGenerator
-.. toctree:: calculator
-.. toctree:: runRules
+.. toctree::
+    :maxdepth: 1
 
+    py_doc
 
 C++ documentation
 *****************
 
-.. doxygenclass:: Simulation
-.. doxygenstruct:: ProgramArgs
-.. doxygenclass:: YamlParser
-.. doxygenclass:: RandomGenerator
+The doxygen documentation of the C++ code is described in the file cxx_doc.rst.
 
-.. doxygenfile:: ArgsParser.h
+.. toctree::
+    :maxdepth: 1
+
+    cxx_doc
 
 For further details see directly the Doxygen C++ documentation: :doxygenhtml:`index.html`
 

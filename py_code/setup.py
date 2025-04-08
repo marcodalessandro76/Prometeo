@@ -10,7 +10,7 @@ EMAIL = 'marco.dalessandro@ism.cnr.it'
 AUTHOR = "Marco D'Alessandro"
 REQUIRES_PYTHON = '>=3.6'
 VERSION = '1.0'
-REQUIRED = ['numpy','matplotlib','ruamel.yaml'] #,'scipy','nbsphinx','netCDF4'
+REQUIRED = ['numpy','matplotlib','ruamel.yaml','nbsphinx'] #,'scipy','nbsphinx','netCDF4'
 #-----------------------------------------------
 
 here = path.abspath(path.dirname(__file__))

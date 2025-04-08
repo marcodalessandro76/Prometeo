@@ -22,7 +22,7 @@ extensions = [
     'sphinx.ext.autodoc',
     'breathe',
     'sphinx.ext.extlinks',
-    'nbsphinx'
+    'nbsphinx',
 ]
 
 extlinks = {
