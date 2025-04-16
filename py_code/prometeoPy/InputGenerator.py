@@ -3,6 +3,7 @@
 This module creates and manages the input file used by the main program.
 The input can be created from scratch or can be initialized from an existing input file.
 """
+
 import os
 from copy import deepcopy
 from prometeoPy import Utilities as U

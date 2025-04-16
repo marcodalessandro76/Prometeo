@@ -125,11 +125,11 @@ class Runner():
             Any: The object returned by the :meth:`post_processing` method,
                 representing the result of the run.
         """
-        from mppi.Utilities import Utils as f
+        from prometeoPy.Utilities import dict_merge
         self._run_options(**kwargs)
         run_args = self.pre_processing()
         run_results = self.process_run(**run_args)
-        f.dict_merge(dest=run_args, src=run_results)
+        dict_merge(dest=run_args, src=run_results)
         return self.post_processing(**run_args)
 
     def pre_processing(self):

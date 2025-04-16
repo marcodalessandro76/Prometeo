@@ -21,3 +21,5 @@ class RunRules(dict):
             dict.__init__(self,scheduler=scheduler,**rules)
         if scheduler == 'slurm':
             print('Slurm scheduler yet to be implemented')
+
+    

@@ -69,5 +69,42 @@ def get_git_info():
     except subprocess.CalledProcessError:
         return None, None
 
+def build_folder_path(dir, label = 'Directory', verbose = True):     
+    """
+    Create a folder path if it does not exist. 
+
+    Args:
+        dir (:py:class:`string`): folder path to be created
+        label (:py:class:`string`): label of the folder
+        verbose (:py:class:`bool`): if True, print a message to the standard output
+    """
+
+    if not os.path.exists(dir):
+        os.makedirs(dir)
+        if verbose: print('create the %s folder : %s' %(label,dir))
+    else:
+        if verbose: print('The %s folder %s already exists' %(label,dir))  
+
+def dict_merge(dest, src):
+    """
+    Recursive dict merge. Inspired by :meth:`dict.update`, instead of
+    updating only top-level keys, dict_merge recurses down into dicts nested
+    to an arbitrary depth, updating keys. The ``src`` is merged into
+    ``dest``.  From :ref:`angstwad/dict-merge.py`
+
+    Args:   
+       dest (dict): dict onto which the merge is executed
+       src (dict): dict merged into dest
+
+    """
+    import collections
+    for k, v in src.items():
+        if (k in dest and isinstance(dest[k], dict)
+                and isinstance(src[k], collections.Mapping)):
+            dict_merge(dest[k], src[k])
+        else:
+            dest[k] = src[k]
+
+    
 
 
